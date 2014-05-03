@@ -11,9 +11,14 @@
 
 namespace League\Fractal;
 
+use League\Fractal\Serializer\DataArraySerializer;
+use League\Fractal\Serializer\SerializerInterface;
+
 class Manager
 {
     protected $requestedScopes = array();
+
+    protected $serializer;
 
     public function getRequestedScopes()
     {
@@ -41,6 +46,20 @@ class Manager
         }
 
         return $scopeInstance;
+    }
+
+    public function setSerializer(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+    }
+
+    public function getSerializer()
+    {
+        if (! $this->serializer) {
+            $this->setSerializer(new DataArraySerializer);
+        }
+
+        return $this->serializer;
     }
 
     protected function parseNestedScopes(array $scopes)

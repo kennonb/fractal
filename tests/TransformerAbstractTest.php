@@ -75,7 +75,7 @@ class TransformerAbstractTest extends \PHPUnit_Framework_TestCase
 
         $transformer->setManager($manager);
 
-        $scope = new Scope($manager, m::mock('League\Fractal\Resource\ResourceInterface'));
+        $scope = new Scope($manager, m::mock('League\Fractal\Resource\ResourceAbstract'));
         $this->assertFalse($transformer->processEmbededResources($scope, array('some' => 'data')));
     }
 
@@ -88,7 +88,7 @@ class TransformerAbstractTest extends \PHPUnit_Framework_TestCase
 
         $transformer->setManager($manager);
 
-        $scope = new Scope($manager, m::mock('League\Fractal\Resource\ResourceInterface'));
+        $scope = new Scope($manager, m::mock('League\Fractal\Resource\ResourceAbstract'));
         $this->assertFalse($transformer->processEmbededResources($scope, array('some' => 'data')));
     }
 
@@ -105,7 +105,7 @@ class TransformerAbstractTest extends \PHPUnit_Framework_TestCase
         $manager->setRequestedScopes(array('book'));
 
         $transformer->setManager($manager);
-        $scope = new Scope($manager, m::mock('League\Fractal\Resource\ResourceInterface'));
+        $scope = new Scope($manager, m::mock('League\Fractal\Resource\ResourceAbstract'));
 
         $transformer->setAvailableEmbeds(array('book'));
         $transformer->processEmbededResources($scope, array());
@@ -123,7 +123,7 @@ class TransformerAbstractTest extends \PHPUnit_Framework_TestCase
         $manager = new Manager;
         $transformer->setManager($manager);
 
-        $scope = new Scope($manager, m::mock('League\Fractal\Resource\ResourceInterface'));
+        $scope = new Scope($manager, m::mock('League\Fractal\Resource\ResourceAbstract'));
 
         $transformer->setDefaultEmbeds(array('book'));
         $transformer->processEmbededResources($scope, array());

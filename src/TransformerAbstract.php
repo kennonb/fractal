@@ -13,7 +13,7 @@ namespace League\Fractal;
 
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
-use League\Fractal\Resource\ResourceInterface;
+use League\Fractal\Resource\ResourceAbstract;
 
 /**
  * Transformer Abstract
@@ -30,7 +30,7 @@ abstract class TransformerAbstract
      *
      * @var array
      */
-    protected $availableEmbeds;
+    protected $availableEmbeds = array();
 
     /**
      * Embed without needing it to be requested
@@ -137,12 +137,12 @@ abstract class TransformerAbstract
             return false;
         }
 
-        if (! $resource instanceof ResourceInterface) {
+        if (! $resource instanceof ResourceAbstract) {
             throw new \Exception(sprintf(
                 'Invalid return value from %s::%s(). Expected %s, received %s.',
                 __CLASS__,
                 $methodName,
-                'League\Fractal\Resource\ResourceInterface',
+                'League\Fractal\Resource\ResourceAbstract',
                 gettype($resource)
             ));
         }
