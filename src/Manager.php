@@ -11,6 +11,9 @@
 
 namespace League\Fractal;
 
+use League\Fractal\Serializer\DataArraySerializer;
+use League\Fractal\Serializer\SerializerInterface;
+
 class Manager
 {
     /**
@@ -26,6 +29,18 @@ class Manager
      * @var array
      **/
     protected $includeParams = array();
+
+    /**
+     * Serializer
+     *
+     * @var \League\Fractal\Serializer\SerializerInterface
+     **/
+    protected $serializer;
+
+    public function getRequestedScopes()
+    {
+        return $this->requestedScopes;
+    }
 
     /**
      * The character used to separate modifier parameters
@@ -141,5 +156,19 @@ class Manager
         }
 
         $this->requestedIncludes = array_values(array_unique($parsed));
+    }
+
+    public function getSerializer()
+    {
+        if (! $this->serializer) {
+            $this->setSerializer(new DataArraySerializer);
+        }
+
+        return $this->serializer;
+    }
+
+    public function setSerializer(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
     }
 }
